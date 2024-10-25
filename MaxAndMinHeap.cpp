@@ -144,6 +144,73 @@ public:
     }
 };
 
+class PriorityQueue
+{
+    maxHeap maxPQ;
+
+public:
+    void insert(int element)
+    {
+        maxPQ.insertElement(element);
+    }
+
+    int extractMax()
+    {
+        if (maxPQ.isEmpty())
+        {
+            throw runtime_error("Priority Queue is empty");
+        }
+        int maxElement = maxPQ.peek(); 
+        maxPQ.removeMax(); 
+        return maxElement; 
+    }
+
+    int maximum()
+    {
+        if (maxPQ.isEmpty())
+        {
+            throw runtime_error("Priority Queue is empty");
+        }
+        return maxPQ.peek(); 
+    }
+
+    void increaseKey(int index, int newKey)
+    {
+        if (index < 0 || index >= maxPQ.length())
+        {
+            throw runtime_error("Invalid index");
+        }
+        if (newKey < maxPQ.getValue(index))
+        {
+            throw runtime_error("New value is smaller than the current value");
+        }
+        maxPQ.array[index] = newKey;
+        maxPQ.heapifyUp(index); 
+    }
+
+    void removeMax()
+    {
+        if (maxPQ.isEmpty())
+        {
+            throw runtime_error("Priority Queue is empty");
+        }
+        maxPQ.removeMax(); 
+    }
+
+    
+    bool isEmpty()
+    {
+        return maxPQ.isEmpty();
+    }
+
+    
+    void display()
+    {
+        cout << "Priority Queue : ";
+        maxPQ.display();
+    }
+};
+
 class minHeap
 {
     int size = 0;
